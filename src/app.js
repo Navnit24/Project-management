@@ -27,6 +27,8 @@ app.use("/api/v1/healthcheck", healthCheckRouter);
 import authRouter from "./routes/auth.router.js";
 app.use("/api/v1/auth", authRouter);
 
+import projectRouter from "./routes/project.routes.js";
+
 app.get('/', (req, res) => {
   res.send('welcome here!')
 });
