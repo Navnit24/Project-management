@@ -28,6 +28,13 @@ import authRouter from "./routes/auth.router.js";
 app.use("/api/v1/auth", authRouter);
 
 import projectRouter from "./routes/project.routes.js";
+app.use("/api/v1/projects", projectRouter);
+
+import taskRouter from "./routes/task.routes.js";
+app.use("/api/v1/tasks", taskRouter);
+
+import noteRouter from "./routes/note.routes.js";
+app.use("/api/v1/notes", noteRouter);
 
 app.get('/', (req, res) => {
   res.send('welcome here!')

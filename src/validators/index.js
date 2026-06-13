@@ -95,10 +95,83 @@ const addMembertoProjectValidator = () => {
      ]
 };
 
+const createTaskValidator = () => {
+    return [
+        body("title")
+            .trim()
+            .notEmpty()
+            .withMessage("Task title is required")
+            .isLength({ min: 3 })
+            .withMessage("Title must be at least 3 characters long"),
+        body("description")
+            .optional()
+            .trim()
+            .isString()
+            .withMessage("Description must be a string"),
+        body("assignedTo")
+            .optional()
+            .isMongoId()
+            .withMessage("Invalid assignee ID"),
+        body("status")
+            .optional()
+            .isIn(["todo", "in_progress", "done"])
+            .withMessage("Status must be one of: todo, in_progress, done"),
+    ];
+};
+
+const updateTaskValidator = () => {
+    return [
+        body("title")
+            .optional()
+            .trim()
+            .isLength({ min: 3 })
+            .withMessage("Title must be at least 3 characters long"),
+        body("description")
+            .optional()
+            .trim()
+            .isString()
+            .withMessage("Description must be a string"),
+        body("assignedTo")
+            .optional()
+            .isMongoId()
+            .withMessage("Invalid assignee ID"),
+        body("status")
+            .optional()
+            .isIn(["todo", "in_progress", "done"])
+            .withMessage("Status must be one of: todo, in_progress, done"),
+    ];
+};
+
+const createSubTaskValidator = () => {
+    return [
+        body("title")
+            .trim()
+            .notEmpty()
+            .withMessage("Subtask title is required")
+            .isLength({ min: 3 })
+            .withMessage("Title must be at least 3 characters long"),
+    ];
+};
+
+const createNoteValidator = () => {
+    return [
+        body("content")
+            .trim()
+            .notEmpty()
+            .withMessage("Note content is required")
+            .isLength({ min: 1 })
+            .withMessage("Content cannot be empty"),
+    ];
+};
+
 export { userRegisterValidator, userLoginValidator, 
     userChangeCurrentPasswordValidator,
     userForgotPasswordValidator,
     userResetForgotPasswordValidator,
     createProjectValidator,
-    addMembertoProjectValidator
+    addMembertoProjectValidator,
+    createTaskValidator,
+    updateTaskValidator,
+    createSubTaskValidator,
+    createNoteValidator
 };
